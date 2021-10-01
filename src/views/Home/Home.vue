@@ -150,6 +150,6 @@ export default {
 {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   border-radius: 10px;
-  background-color: #81C7D4;  /*滚动条的背景颜色*/
+  background-color: #A5DEE4;  /*滚动条的背景颜色*/
 }
 </style>

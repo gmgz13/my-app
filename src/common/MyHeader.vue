@@ -24,13 +24,10 @@
           <el-menu-item index="2"><span class="centerText">校园</span></el-menu-item>
         </router-link>
         <el-menu-item>
-          <el-button type="primary" icon="el-icon-plus" circle plain class="upload" @click="dialogVisible = true"></el-button>
-          <el-dialog v-model="dialogVisible" width="30%">
-            <div class="dialog">
-              <el-button type="primary" round>发布心情</el-button>
-              <el-button type="primary" round>发布帖子</el-button>
-            </div>
-          </el-dialog>
+          <el-button type="primary" icon="el-icon-plus" circle plain class="upload" @click="view = true"></el-button>
+          <el-drawer v-model="view" size="75%" direction="btt" :show-close="false" class="personalDrawer" :with-header="false">
+            <Upload></Upload>
+          </el-drawer>
         </el-menu-item>
         <router-link to="/square" class="square">
           <el-menu-item index="4"><span class="centerText">附近</span></el-menu-item>
@@ -55,28 +52,45 @@
 import {useStore,} from "vuex";
 import {ref} from "vue";
 import Personal from "@/common/Personal";
+import Upload from "@/common/Upload";
 
 export default {
   components:{
-    Personal
+    Personal,
+    Upload
   },
   setup() {
     const store = useStore()
     let value = store.state.searchValue
     let personal = store.state.personal
     const drawer = ref(false)
-    const dialogVisible = ref(false)
+    const view = ref(false)
     return {
       activeIndex: '1',
       value,
       personal,
       drawer,
-      dialogVisible
+      view,
+      textarea1: ref(''),
+      textarea2: ref(''),
+      title:ref('')
+    }
+  },
+  data() {
+    return {
+      dialogImageUrl: '',
+      dialogVisible: false,
     }
   },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath)
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList)
+    },
+    handlePreview(file) {
+      console.log(file)
     },
   },
 }
@@ -130,9 +144,5 @@ img{
   width: 50px;
   height: 50px;
 }
-.dialog{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 </style>

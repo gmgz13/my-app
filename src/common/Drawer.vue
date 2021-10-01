@@ -8,6 +8,9 @@
     <el-drawer v-model="collection" :append-to-body="true" :with-header="false" direction="ltr">
       <p>我的收藏</p>
     </el-drawer>
+    <el-button type="success" @click="information = true" round>我的消息</el-button>
+  </el-row>
+  <el-row class="footer">
     <el-button type="warning" @click="information = true" round>修改信息</el-button>
     <el-drawer v-model="information" :append-to-body="true" :with-header="false" direction="ltr">
       <el-descriptions :column="1" class="centerText">
@@ -41,8 +44,6 @@
         </el-descriptions-item>
       </el-descriptions>
     </el-drawer>
-  </el-row>
-  <el-row class="footer">
     <el-button type="danger" @click="password = true" round>修改密码</el-button>
     <el-drawer v-model="password" :append-to-body="true" :with-header="false" direction="ltr">
       <el-descriptions :column="1" class="centerText1">
