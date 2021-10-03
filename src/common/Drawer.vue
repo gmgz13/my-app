@@ -8,7 +8,10 @@
     <el-drawer v-model="collection" :append-to-body="true" :with-header="false" direction="ltr">
       <p>我的收藏</p>
     </el-drawer>
-    <el-button type="success" @click="information = true" round>我的消息</el-button>
+    <el-button type="success" round @click="centerDialogVisible = true">我的消息</el-button>
+    <el-dialog v-model="centerDialogVisible" title="我的消息" width="56%" center>
+      <Message></Message>
+    </el-dialog>
   </el-row>
   <el-row class="footer">
     <el-button type="warning" @click="information = true" round>修改信息</el-button>
@@ -72,16 +75,18 @@
         </el-descriptions-item>
       </el-descriptions>
     </el-drawer>
-    <el-button type="danger" round size="middal">退出登录</el-button>
+    <el-button type="danger" round>退出登录</el-button>
   </el-row>
 </template>
 
 <script>
 import {ref} from "vue";
 import {useStore} from "vuex";
+import Message from "@/common/Message";
 
 export default {
   name: "Drawer",
+  components:{Message},
   setup(){
     const store = useStore()
     let personal = store.state.personal
@@ -112,8 +117,12 @@ export default {
       againPassword,
       isTrue,
 
-      name,age,state,signature,
+      name,
+      age,
+      state,
+      signature,
 
+      centerDialogVisible: ref(false),
       radio: ref('1'),
     }
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="allMain">
-    <el-card class="box-card rank" @click="play(1)">
+    <el-card class="box-card rank">
       <template #header>
         <div class="card-header">
           <span>排行榜</span>
@@ -10,22 +10,23 @@
           {{item.title}}
       </div>
     </el-card>
-    <el-card class="home">
-      <el-card class="box-card main" v-for="(item,i) in data" :key="i">
-        <div class="header">
-          <div><img class="tx" :src="item.picUrl"></div>
-          <div class="name">{{item.name}}</div>
-        </div>
-        <div class="text item">
-          {{item.article}}
-        </div>
-        <div class="footer">
-          <img v-show="!like" class="icon" :src="like1">
-          <img v-show="like" class="icon" :src="like2">
-        </div>
-      </el-card>
-    </el-card>
-
+    <div class="home">
+      <el-scrollbar max-height="640px">
+        <el-card class="box-card main" v-for="(item,i) in data" :key="i">
+          <div class="header">
+            <div><img class="tx" :src="item.picUrl"></div>
+            <div class="name">{{item.name}}</div>
+          </div>
+          <div class="text item">
+            {{item.article}}
+          </div>
+          <div class="footer">
+            <img v-show="!like" class="icon" :src="like1">
+            <img v-show="like" class="icon" :src="like2">
+          </div>
+        </el-card>
+      </el-scrollbar>
+    </div>
   </div>
 </template>
 
@@ -62,6 +63,7 @@ export default {
       this.count += 2
     },
     ...mapMutations(['setSearchValue'])
+
   }
 }
 </script>
@@ -80,14 +82,12 @@ export default {
   position:relative;
   margin-top:10px;
   left: 200px;
-  height: 640px;
   width: 850px;
-  overflow:scroll;
-  background-color: aliceblue;
+  height: 630px;
 }
 .main{
   width: 800px;
-  height: 220px;
+  height: 210px;
   position:relative;
 }
 .box-card{
@@ -138,18 +138,11 @@ export default {
   text-align: center;
   margin:15px 5px;
 }
-::-webkit-scrollbar
-{
-  display: flow;
-  width: 8px;  /*滚动条宽度*/
-  height: 7px;  /*滚动条高度*/
+/*隐藏滚动条*/
+::-webkit-scrollbar {
+  width: 0 !important;
 }
-
-/*定义滑块 内阴影+圆角*/
-::-webkit-scrollbar-thumb
-{
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  border-radius: 10px;
-  background-color: #A5DEE4;  /*滚动条的背景颜色*/
+::-webkit-scrollbar {
+  width: 0 !important;height: 0;
 }
 </style>
