@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="school">
     <el-scrollbar max-height="640px">
       <el-card class="box-card main" v-for="(item,i) in data" :key="i">
         <div class="header">
@@ -45,13 +45,13 @@ export default {
 </script>
 
 <style scoped>
-.home{
+.school{
   display: flex;
   flex-direction:column;
   position:relative;
-  margin-top:10px;
-  left: 200px;
-  width: 850px;
+  margin:10px;
+  left: 350px;
+  width: 900px;
   height: 630px;
 }
 .tx{
@@ -102,12 +102,5 @@ export default {
 .box-card{
   width: 800px;
   margin: 10px 0;
-}
-/*隐藏滚动条*/
-::-webkit-scrollbar {
-  width: 0 !important;
-}
-::-webkit-scrollbar {
-  width: 0 !important;height: 0;
 }
 </style>

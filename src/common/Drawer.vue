@@ -2,11 +2,40 @@
   <el-row class="footer">
     <el-button type="primary" @click="comment = true" round>我的评论</el-button>
     <el-drawer v-model="comment" :append-to-body="true" :with-header="false" direction="ltr">
-      <p>我的评论</p>
+      <el-scrollbar v-show="!show" max-height="740px">
+        <div v-for="(item , i) in personal.comments" :key="i" class="myComment">
+          <div class="user">
+            <img :src="item.picUrl" class="tx">
+            <div class="UserContent">
+              <div class="name">{{item.name}}</div>
+              <div class="time">{{item.time}} 评论了帖子</div>
+            </div>
+          </div>
+          <div class="comment">{{item.say}}</div>
+          <div class="article">
+            <div class="author">{{item.author}}</div>
+            <div class="title">{{item.articleTitle}}</div>
+          </div>
+        </div>
+      </el-scrollbar>
     </el-drawer>
     <el-button type="primary" @click="collection = true" round>我的收藏</el-button>
     <el-drawer v-model="collection" :append-to-body="true" :with-header="false" direction="ltr">
-      <p>我的收藏</p>
+      <el-scrollbar v-show="!show" max-height="740px">
+        <div v-for="(item , i) in personal.collections" :key="i" class="myComment">
+          <div class="user">
+            <img :src="item.articlePicUrl" class="tx">
+            <div class="UserContent">
+              <div class="name">{{item.author}}</div>
+              <div class="time">{{item.time}} 发表了帖子</div>
+            </div>
+          </div>
+          <div class="articleCollection">
+            <div class="titleCollection">{{item.articleTitle}}</div>
+            <div class="contentCollection">{{item.articleContent}}</div>
+          </div>
+        </div>
+      </el-scrollbar>
     </el-drawer>
     <el-button type="success" round @click="centerDialogVisible = true">我的消息</el-button>
     <el-dialog v-model="centerDialogVisible" title="我的消息" width="56%" center>
@@ -24,8 +53,7 @@
               action="https://jsonplaceholder.typicode.com/posts/"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload"
-          >
+              :before-upload="beforeAvatarUpload">
             <img v-if="imageUrl" :src="imageUrl" class="avatar" />
             <i v-else class="el-icon-plus"></i>
           </el-upload>
@@ -215,5 +243,59 @@ export default {
 }
 .input1{
   margin-right: 3px;
+}
+.myComment{
+  border-bottom: 1px solid #EEEDED;
+  margin: 10px;
+}
+.author{
+  font-size: 12px;
+  color: #8c939d;
+  margin: 5px;
+}
+.article{
+  background-color: #F8F8F8;
+  margin: 10px;
+}
+.tx{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 10px;
+}
+.title{
+  font-size: 13px;
+  margin: 5px;
+}
+.titleCollection{
+  margin: 5px 10px;
+  font-size: 13px;
+  color: #4F4E4E;
+  font-weight: 600;
+}
+.name{
+  font-size: 13px;
+}
+.comment{
+  font-size: 14px;
+  margin:0 10px;
+}
+.user{
+  display: flex;
+  align-items: center;
+}
+.time{
+  font-size: 12px;
+  color: #9AA9B7;
+}
+.contentCollection{
+  font-size: 12px;
+  margin:10px;
+  background-color: #F8F8F8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient: vertical;
 }
 </style>

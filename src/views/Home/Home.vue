@@ -138,11 +138,5 @@ export default {
   text-align: center;
   margin:15px 5px;
 }
-/*隐藏滚动条*/
-::-webkit-scrollbar {
-  width: 0 !important;
-}
-::-webkit-scrollbar {
-  width: 0 !important;height: 0;
-}
+
 </style>

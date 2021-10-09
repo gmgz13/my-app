@@ -7,11 +7,11 @@
           <p>用 户 名 :<input id="userName" v-model="user.userName" name="userName" type="text" autofocus required><label id="name_trip"></label></p>
           <p>用户密码:<input id="password" v-model="user.userPassword" type="password" required><label id="password_trip"></label></p>
           <p>确认密码:<input id="surePassword" type="password" required><label id="surePassword_trip"></label></p>
-          <p>电子邮件:<input id="email" v-model="user.userEmail" type="email" required><label id="emil_trip"></label></p>
           <div class="check">
-            <p>验 证 码 :<input id="code" type="text" required><label id="code_trip"></label></p>
+            <p>电子邮件:<input id="email" v-model="user.userEmail" type="email" required><label id="emil_trip"></label></p>
             <button class="checking">获取验证码</button>
           </div>
+          <p>验 证 码 :<input id="code" type="text" required><label id="code_trip"></label></p>
           <p>就读学校:<input id="school" v-model="user.userSchool" type="text" required><label id="school_trip"></label></p>
         </div>
         <div>

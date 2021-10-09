@@ -7,7 +7,7 @@
             :autosize="{ minRows: 5, maxRows: 5 }"
             type="textarea"
             placeholder="分享一下今天的心情吧！"
-            maxlength="30"
+            maxlength="150"
             show-word-limit
             class="textarea">
         </el-input>
@@ -33,6 +33,25 @@
       </el-tab-pane>
       <el-tab-pane label="发布帖子" class="title">
         <el-input v-model="title" placeholder="标题" maxlength="15" show-word-limit/>
+        <div>
+          <el-tag
+              v-for="tag in dynamicTags"
+              :key="tag"
+              closable
+              :disable-transitions="false"
+              @close="handleClose(tag)">
+            {{ tag }}</el-tag>
+          <el-input
+              v-if="inputVisible"
+              ref="saveTagInput"
+              v-model="inputValue"
+              class="input-new-tag"
+              size="mini"
+              @keyup.enter="handleInputConfirm"
+              @blur="handleInputConfirm">
+          </el-input>
+          <el-button v-else class="button-new-tag" size="small" @click="showInput">+ 添加标签</el-button>
+        </div>
         <el-input
             v-model="textarea2"
             :autosize="{ minRows: 8, maxRows: 10 }"
@@ -50,7 +69,7 @@
             :autosize="{ minRows: 5, maxRows: 5 }"
             type="textarea"
             placeholder="分享一下今天的心情吧！"
-            maxlength="30"
+            maxlength="150"
             show-word-limit
             class="textarea">
         </el-input>
@@ -60,7 +79,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {useStore} from "vuex";
 import {ref} from "vue";
 
@@ -81,7 +100,7 @@ export default {
       textarea1: ref(''),
       textarea2: ref(''),
       textarea3: ref(''),
-      title:ref('')
+      title:ref(''),
     }
   },
   data() {
@@ -96,6 +115,9 @@ export default {
         },],
       dialogImageUrl: '',
       dialogVisible: false,
+      dynamicTags: [],
+      inputVisible: false,
+      inputValue: '',
     }
   },
   methods: {
@@ -107,6 +129,25 @@ export default {
     },
     handlePreview(file) {
       console.log(file)
+    },
+    handleClose(tag) {
+      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1)
+    },
+
+    showInput() {
+      this.inputVisible = true
+      this.$nextTick(() => {
+        this.$refs.saveTagInput.$refs.input.focus()
+      })
+    },
+
+    handleInputConfirm() {
+      const inputValue = this.inputValue
+      if (inputValue) {
+        this.dynamicTags.push(inputValue)
+      }
+      this.inputVisible = false
+      this.inputValue = ''
     },
   },
 }
@@ -137,11 +178,19 @@ export default {
   width: 80px;
   height: 80px;
 }
-/*隐藏滚动条*/
-::-webkit-scrollbar {
-  width: 0 !important;
+.el-tag + .el-tag {
+  margin-left: 10px;
 }
-::-webkit-scrollbar {
-  width: 0 !important;height: 0;
+.button-new-tag {
+  margin-left: 10px;
+  height: 32px;
+  line-height: 30px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.input-new-tag {
+  width: 90px;
+  margin-left: 10px;
+  vertical-align: bottom;
 }
 </style>

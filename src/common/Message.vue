@@ -146,7 +146,7 @@ export default {
 }
 .header{
   position: absolute;
-  right: 350px;
+  right: 280px;
   height: 50px;
 }
 .messageList{
@@ -175,12 +175,5 @@ export default {
   position:absolute;
   right: 10px;
   bottom: 10px;
-}
-/*隐藏滚动条*/
-::-webkit-scrollbar {
-  width: 0 !important;
-}
-::-webkit-scrollbar {
-  width: 0 !important;height: 0;
 }
 </style>
