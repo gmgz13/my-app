@@ -21,7 +21,7 @@ export default createStore({
             {title:'1234567',},
             {title:'12345678',}],
         //搜索
-        searchValue:'',
+        searchValue:"",
         //主页说说
         data:[
             {

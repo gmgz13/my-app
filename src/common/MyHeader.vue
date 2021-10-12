@@ -61,7 +61,7 @@ export default {
   },
   setup() {
     const store = useStore()
-    let value = store.state.searchValue
+    let value = ref('')
     let personal = store.state.personal
     const drawer = ref(false)
     const view = ref(false)
